@@ -1,6 +1,6 @@
 function getProducts(req, res, next) {
   res.status(200).json({
-    products: [{ name: "Apple", description: "This is a green apple!" }],
+    products: [{ name: "Apple", description: "This is a red apple!" }],
   });
 }
 
