@@ -1,16 +1,21 @@
-function getProducts(req, res, next) {
-  res.status(200).json({
-    products: [{ name: "Apple", description: "This is a red apple!" }],
-  });
+import Product from "../Models/productModel";
+
+async function getProducts(req, res, next) {
+  try {
+    const products = await Product.find();
+    res.status(200).send(products);
+  } catch (error) {
+    console.log(error);
+  }
 }
 
-function postProduct(req, res, next) {
-  const name = req.body.name;
-  const description = req.body.description;
-  res.status(201).json({
-    message: "Product created successfully",
-    product: { name: name, description: description },
-  });
+async function postProduct(req, res, next) {
+  try {
+    const product = await Product.create(req.body);
+    res.status(200).send(product);
+  } catch (error) {
+    console.log(error);
+  }
 }
 
 export default { getProducts, postProduct };
