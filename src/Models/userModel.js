@@ -23,8 +23,6 @@ const UserSchema = new Schema({
   ],
 });
 
-ProductSchema.index({ name: "text" });
+const User = mongoose.model("User", UserSchema);
 
-const Product = mongoose.model("Product", ProductSchema);
-
-export default Product;
+export default User;
