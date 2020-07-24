@@ -3,6 +3,7 @@ import bodyParser from "body-parser";
 import mongoose from "mongoose";
 
 import productRoutes from "./routes/productRoutes";
+import authRoutes from "./routes/authRoutes";
 
 const app = express();
 app.use(bodyParser.urlencoded({ extended: true }));
@@ -17,7 +18,9 @@ app.use((req, res, next) => {
   res.setHeader("Access-Control-Allow-Headers", "Content-Type, Authorization");
   next();
 });
+
 app.use("/products", productRoutes);
+app.use("/auth", authRoutes);
 
 mongoose
   .connect(process.env.CONNECTION_STRING, { useUnifiedTopology: true })
