@@ -21,12 +21,16 @@ app.use((req, res, next) => {
 
 app.use("/products", productRoutes);
 app.use("/auth", authRoutes);
+app.use((error, req, res, next) => {
+  console.log("in error middleware");
+  res.status(error.statusCode).send(error.data);
+});
 
 mongoose
   .connect(process.env.CONNECTION_STRING, { useUnifiedTopology: true })
   .then((result) => {
     console.log("Connected to a server!");
-    app.listen(4000);
+    app.listen(8080);
   })
   .catch((error) => {
     console.log(error);
