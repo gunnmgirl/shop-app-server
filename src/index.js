@@ -22,7 +22,7 @@ app.use((req, res, next) => {
 app.use("/products", productRoutes);
 app.use("/auth", authRoutes);
 app.use((error, req, res, next) => {
-  console.log("in error middleware");
+  console.log("In error middleware ", error);
   res.status(error.statusCode).send(error.data);
 });
 
