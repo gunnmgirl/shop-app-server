@@ -1,4 +1,5 @@
 import Product from "../Models/productModel";
+import User from "../Models/userModel";
 
 async function getProducts(req, res, next) {
   try {
@@ -12,8 +13,10 @@ async function getProducts(req, res, next) {
 
 async function postProduct(req, res, next) {
   try {
-    console.log("in post pro");
     const product = await Product.create(req.body);
+    const user = await User.findById(req.userId);
+    user.products.push(product);
+    await user.save();
     res.status(200).send(product);
   } catch (error) {
     console.log(error);
